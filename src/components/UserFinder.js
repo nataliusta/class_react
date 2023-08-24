@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect, Component } from 'react';
+import { Fragment, Component } from 'react';
 
 import Users from './Users';
 import classes from './UserFinder.module.css';
@@ -18,6 +18,11 @@ class UserFinder extends Component {
         };
     }
 
+    componentDidMount() {  // will run once!
+        // send http request...
+        this.setState({ filteredUsers: DUMMY_USERS });
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevState.searchTerm !== this.state.searchTerm) {
             this.setState({
@@ -25,8 +30,7 @@ class UserFinder extends Component {
                     user.name.includes(this.state.searchTerm)
                 ),
             });
-        }
-        
+        }  
     }
 
     searchChangeHandler(event) {
